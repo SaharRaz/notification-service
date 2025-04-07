@@ -1,45 +1,18 @@
 import express from 'express';
-import connectDB from './db/dbConnection.js';
-import userRoutes from './routes/user.routes.js';
-// import transactionsRoutes from './routes/transaction.routes.js';
-// import groupsRoutes from './routes/group.routes.js';
-// import notificationsRoutes from './routes/notification.routes.js';
+import notificationsRoutes from './routes/notification.routes.js';
 import logger from './systems/logger.js';
 
-// Initialize MongoDB Connection
-const initializeDatabase = async () => {
-    try {
-        await connectDB();
-        logger.info('Database connection established successfully.');
-    } catch (error) {
-        logger.error('Failed to initialize database connection:', { error: error.message });
-        process.exit(1); // Exit the process if database connection fails
-    }
-};
+const app = express();
+app.use(express.json());
 
-const startServices = async () => {
-    const app = express();
-    app.use(express.json());
+// Register routes
+app.use('/notifications', notificationsRoutes);
 
-    // Register all routes for each service
-    app.use('/users', userRoutes);
-    // app.use('/transactions', transactionsRoutes);
-    // app.use('/groups', groupsRoutes);
-    // app.use('/notifications', notificationsRoutes);
+// Set port
+const PORT = 5003;
 
-    // Define ports for each service
-    const PORTS = [5001];
-
-    // Start an instance of the app for each service
-    PORTS.forEach((port, index) => {
-        app.listen(port, () => {
-            logger.info(`Service ${index + 1} running on port ${port}`);
-            console.log(`Service ${index + 1} running on http://localhost:${port}`);
-        });
-    });
-};
-
-// Initialize Database Connection and Start Services
-initializeDatabase().then(() => {
-    startServices().then(() => {});
+// Start server
+app.listen(PORT, () => {
+    logger.info(`Notification service running on port ${PORT}`);
+    console.log(`Notification service running on http://localhost:${PORT}`);
 });

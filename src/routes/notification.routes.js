@@ -1,7 +1,7 @@
 import express from 'express';
-import notificationsController from '../controller/notifications.controller.js';
+import notificationsController from '../controller/notification.controller.js';
 import validateSchema from '../middleware/notification.validateSchema.middleware.js';
-import { createNotificationSchema, updateNotificationSchema } from './notifications.routes.schema.js';
+import { createNotificationSchema, updateNotificationSchema } from './notification.routes.schema.js';
 
 const router = express.Router();
 
