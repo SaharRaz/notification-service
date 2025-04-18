@@ -1,7 +1,10 @@
 import express from 'express';
 import notificationsRoutes from './routes/notification.routes.js';
 import logger from './systems/logger.js';
+import dotenv from 'dotenv';
 
+
+dotenv.config();
 const app = express();
 app.use(express.json());
 

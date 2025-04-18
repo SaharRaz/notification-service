@@ -16,6 +16,8 @@ services:
       PORT: 5003
     volumes:
       - ./notifications:/usr/src/app
+    networks:
+      - digital_wallet_network
 
 
 
@@ -24,4 +26,5 @@ services:
 networks:
   digital_wallet_network:
     driver: bridge
+    external: true
 
