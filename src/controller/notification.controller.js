@@ -1,17 +1,16 @@
-const notificationsController = {
-    async createNotification(data, source = 'unknown') {
-        try {
-            console.log(`[NOTIFICATION SERVICE] 🔔 Notification received from ${source}`);
-            console.log(`[NOTIFICATION SERVICE] 📦 Data:`, data);
+import logger from '../middleware/logger.js';
+import { SERVICE_NAME } from '../configs/constants.js';
 
-            // Simulated "save"
-            console.log(`[NOTIFICATION SERVICE] ✅ Notification processed for user ${data.userId}`);
-            return { success: true, message: 'Notification handled (no DB)' };
+class NotificationController {
+    async createNotification(data, source) {
+        try {
+            logger.info(`${SERVICE_NAME}[createNotification] Incoming notification`, { source, data });
+            return { status: 'Notification received', source };
         } catch (err) {
-            console.error(`[NOTIFICATION SERVICE] ❌ Failed to handle notification from ${source}`, err.message);
+            logger.error(`${SERVICE_NAME}[createNotification] Error`, { error: err.message });
             throw err;
         }
-    },
-};
+    }
+}
 
-export default notificationsController;
+export default NotificationController;

@@ -1,7 +1,7 @@
 import { createLogger, format, transports } from 'winston';
 
 const logger = createLogger({
-    level: 'info', // Set log level (can be 'info', 'warn', 'error', 'debug', etc.)
+    level: 'debug',
     format: format.combine(
         format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), // Add timestamps
         format.printf(({ timestamp, level, message, ...meta }) => {
@@ -19,7 +19,6 @@ const logger = createLogger({
     ],
 });
 
-// If we're not in production, log debug messages to the console
 if (process.env.NODE_ENV !== 'production') {
     logger.add(
         new transports.Console({

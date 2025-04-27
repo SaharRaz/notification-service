@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import logger from '../systems/logger.js';
+import logger from '../middleware/logger.js';
 
 const connectDB = async () => {
     const mongoURI = process.env.MONGO_URI || 'mongodb://root:root@mongodb-user:27017/userDb?authSource=admin';
@@ -18,5 +18,4 @@ const connectDB = async () => {
     }
 };
 
-// Automatically call connectDB to establish the connection
 export default connectDB;
